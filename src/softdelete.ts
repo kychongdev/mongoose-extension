@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { CallbackError } from "mongoose";
+
 
 export const softDelete = (schema: mongoose.Schema) => {
   schema.add({
@@ -12,4 +13,16 @@ export const softDelete = (schema: mongoose.Schema) => {
       default: null,
     },
   });
+
+  schema.pre(
+    ["find", "countDocuments", "findOne"],
+    async function (this, next: (err?: CallbackError) => void) {
+      if (this.getFilter().isDeleted === true) {
+        return next();
+      }
+      this.setQuery({ ...this.getFilter(), isDeleted: false });
+      next();
+    },
+  );
+
 };
