@@ -25,4 +25,7 @@ export const softDelete = (schema: mongoose.Schema) => {
     },
   );
 
+  schema.static("findSoftDeleted", async function () {
+    return this.find({ isDeleted: true });
+  });
 };
