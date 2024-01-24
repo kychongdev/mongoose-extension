@@ -5,7 +5,7 @@ export default {
   input: 'src/index.ts',
   output: {
     dir: 'src/dist',
-    format: 'cjs'
+    format: 'esm'
   },
   plugins: [terser(),typescript()]
 };

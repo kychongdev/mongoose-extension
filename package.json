@@ -11,6 +11,7 @@
     "build": "rollup -c",
     "generate:doc": "typedoc src/index.ts --out docs/src"
   },
+  "main":"src/dist/index.js",
   "dependencies": {
     "mongoose": "^8.1.0"
   },
